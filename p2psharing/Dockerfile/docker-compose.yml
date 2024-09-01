@@ -1,0 +1,14 @@
+# docker-compose.yml
+version: '3'
+services:
+  servidor:
+    build: ./servidor
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./shared:/app/shared
+
+  cliente:
+    build: ./cliente
+    depends_on:
+      - servidor

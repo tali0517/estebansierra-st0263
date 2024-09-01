@@ -1,0 +1,21 @@
+// grpc_service.proto
+syntax = "proto3";
+
+service FileService {
+    rpc ListFiles (Empty) returns (FileList);
+    rpc EchoService (EchoRequest) returns (EchoResponse);
+}
+
+message Empty {}
+
+message FileList {
+    repeated string files = 1;
+}
+
+message EchoRequest {
+    string message = 1;
+}
+
+message EchoResponse {
+    string message = 1;
+}
