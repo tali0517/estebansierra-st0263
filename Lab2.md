@@ -18,7 +18,7 @@ Crear la tabla HDI en HDFS usando Beeline
 ```
 # tabla manejada por hive: /user/hive/warehouse
 $ beeline
-use usernamedb;
+use esierrap;
 CREATE TABLE HDI (id INT, country STRING, hdi FLOAT, lifeex INT, mysch INT, eysch INT, gni INT) 
 ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
 STORED AS TEXTFILE;
@@ -27,7 +27,7 @@ STORED AS TEXTFILE;
 ### Cargar datos a la tabla en HDFS
 Opción 1: Copiar datos directamente hacia HDFS
 ```
-$ hdfs dfs -put hdfs:///user/hadoop/datasets/onu/hdi-data.csv hdfs:///user/hive/warehouse/usernamedb.db/hdi
+$ hdfs dfs -put hdfs:///user/hadoop/datasets/onu/hdi/hdi-data.csv hdfs:///user/hive/warehouse/esierrap.db/hdi
 ```
 
 Opción 2: Cargar datos desde Hive
@@ -35,12 +35,12 @@ Primero, otorgar permisos completos al directorio:
 ```
 $ hdfs dfs -chmod -R 777 /user/hadoop/datasets/onu/
 $ beeline
-0: jdbc:hive2://sandbox-hdp.hortonworks.com:2> LOAD DATA INPATH '/user/hadoop/datasets/onu/hdi-data.csv' INTO TABLE HDI;
+0: jdbc:hive2://sandbox-hdp.hortonworks.com:2> LOAD DATA INPATH '/user/hadoop/datasets/onu/hid/hdi-data.csv' INTO TABLE HDI;
 ```
 
 ### Crear una tabla externa en HDFS
 ```
-use usernamedb;
+use esierrap;
 CREATE EXTERNAL TABLE HDI (id INT, country STRING, hdi FLOAT, lifeex INT, mysch INT, eysch INT, gni INT) 
 ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' 
 STORED AS TEXTFILE 
@@ -50,7 +50,7 @@ LOCATION '/user/hadoop/datasets/onu/hdi/';
 ### Crear la tabla HDI en EMR/S3/Hue/Hive
 ```
 # tabla externa en S3: 
-use usernamedb;
+use esierrap;
 CREATE EXTERNAL TABLE HDI (id INT, country STRING, hdi FLOAT, lifeex INT, mysch INT, eysch INT, gni INT) 
 ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' 
 STORED AS TEXTFILE 
@@ -60,7 +60,7 @@ LOCATION 's3://afruao-datasets/onu/hdi/';
 ### Consultas y Cálculos sobre la tabla HDI
 Mostrar tablas y describir la tabla HDI
 ```
-use usernamedb;
+use esierrap;
 show tables;
 describe hdi;
 ```
@@ -78,7 +78,7 @@ select country, gni from hdi where gni > 2000;
 Crear la tabla EXPO en Hive
 Obtener los datos base export-data.csv y ubicarlos en 'datasets'.
 ```
-use usernamedb;
+use esierrap;
 CREATE EXTERNAL TABLE EXPO (country STRING, expct FLOAT) 
 ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' 
 STORED AS TEXTFILE 
@@ -94,7 +94,7 @@ SELECT h.country, gni, expct FROM HDI h JOIN EXPO e ON (h.country = e.country) W
 Crear la tabla docs en Hive para WordCount
 Alternativa 1: Usar HDFS
 ```
-use usernamedb;
+use esierrap;
 CREATE EXTERNAL TABLE docs (line STRING) 
 STORED AS TEXTFILE 
 LOCATION 'hdfs://localhost/user/hadoop/datasets/gutenberg-small/';
