@@ -54,7 +54,7 @@ use esierrap;
 CREATE EXTERNAL TABLE HDI (id INT, country STRING, hdi FLOAT, lifeex INT, mysch INT, eysch INT, gni INT) 
 ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' 
 STORED AS TEXTFILE 
-LOCATION 's3://afruao-datasets/onu/hdi/';
+LOCATION 's3://esierrap-datasets/onu/hdi/';
 ```
 
 ### Consultas y Cálculos sobre la tabla HDI
@@ -82,7 +82,7 @@ use esierrap;
 CREATE EXTERNAL TABLE EXPO (country STRING, expct FLOAT) 
 ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' 
 STORED AS TEXTFILE 
-LOCATION 's3://afruao-datasets/onu/export/';
+LOCATION 's3://esierrap-datasets/onu/export/';
 ```
 
 ### Realizar el JOIN entre las tablas HDI y EXPO
@@ -104,7 +104,7 @@ Alternativa 2: Usar S3
 ```
 CREATE EXTERNAL TABLE docs (line STRING) 
 STORED AS TEXTFILE 
-LOCATION 's3://hortegag-datasets/gutenberg-small/';
+LOCATION 's3://esierrap-datasets/gutenberg-small/';
 ```
 
 ### WordCount ordenado por palabra
