@@ -40,7 +40,7 @@ df.groupBy("Estado").avg("Edad").show()
 Guarda el DataFrame en AWS S3 y Google Drive:
 ```python 
 # Guardar en AWS S3 en formato Parquet
-df_filtered.write.mode("overwrite").parquet("s3://afruao-datasets/covid-data")
+df_filtered.write.mode("overwrite").parquet("s3://esierrap-datasets/covid-data")
 
 # Con Google Colab
 from google.colab import drive
